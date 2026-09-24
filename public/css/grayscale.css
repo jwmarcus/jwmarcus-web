@@ -4,18 +4,6 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-.circularFace {
-    width: 275px;
-    height: 275px;
-    border-radius: 125px;
-    -webkit-border-radius: 125px;
-    -moz-border-radius: 125px;
-    background: url(../img/face.png) no-repeat;
-    text-align: center;
-    display: inline-block;
-    margin-bottom: 30px;
-}
-
 body {
     width: 100%;
     height: 100%;
@@ -86,19 +74,10 @@ a:focus {
     font-weight: 700;
 }
 
-.navbar-custom .navbar-brand:focus {
-    outline: 0;
-}
-
 .navbar-custom .navbar-brand .navbar-toggle {
     padding: 4px 6px;
     font-size: 16px;
     color: #fff;
-}
-
-.navbar-custom .navbar-brand .navbar-toggle:focus,
-.navbar-custom .navbar-brand .navbar-toggle:active {
-    outline: 0;
 }
 
 .navbar-custom a {
@@ -112,19 +91,13 @@ a:focus {
 }
 
 .navbar-custom .nav li a:hover {
-    outline: 0;
     color: rgba(255,255,255,.8);
     background-color: transparent;
 }
 
 .navbar-custom .nav li a:focus,
 .navbar-custom .nav li a:active {
-    outline: 0;
     background-color: transparent;
-}
-
-.navbar-custom .nav li.active {
-    outline: 0;
 }
 
 .navbar-custom .nav li.active a {
@@ -183,7 +156,7 @@ a:focus {
 
 @media(min-width:768px) {
     .intro {
-        height: 100%;
+        height: 100vh;
         padding: 0;
     }
 
@@ -213,7 +186,6 @@ a:focus {
 
 .btn-circle:hover,
 .btn-circle:focus {
-    outline: 0;
     color: #fff;
     background: rgba(255,255,255,.1);
 }
@@ -293,7 +265,7 @@ a:focus {
     margin-top: 100px;
 }
 
-@media(min-width:767px) {
+@media(min-width:768px) {
     .content-section {
         padding-top: 150px;
     }
@@ -327,7 +299,6 @@ a:focus {
 .btn-default:hover,
 .btn-default:focus {
     border: 1px solid #42dca3;
-    outline: 0;
     color: #000;
     background-color: #42dca3;
 }
@@ -383,7 +354,7 @@ img::-moz-selection {
 }
 
 body {
-    webkit-tap-highlight-color: rgba(255,255,255,.2);
+    -webkit-tap-highlight-color: rgba(255,255,255,.2);
 }
 
 /*!
@@ -392,16 +363,30 @@ body {
 
 .card {
    padding: 25px;
-   text-align: justify;
-}
-
-.card h3, ul {
-  text-align: center!important;
+   text-align: left;
 }
 
 @media(min-width:768px) {
-    .upper-card {
-      height:350px;
+    .card {
+       text-align: justify;
+    }
+}
+
+.card h3,
+.card ul {
+  text-align: center!important;
+}
+
+@media(min-width:1200px) {
+    .card-row {
+      display: flex;
+    }
+    .card-row .card {
+      display: flex;
+      flex-direction: column;
+    }
+    .card-row .upper-card {
+      flex: 1 0 auto;
     }
 }
 
@@ -425,8 +410,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   z-index: 1;
   background: #000;
   opacity: 0.35;
@@ -462,4 +447,194 @@ body {
 
 .nocase {
   text-transform: none;
+}
+
+/*!
+ * Layout, readability, and accessibility helpers
+ */
+
+.section-heading {
+  margin-bottom: 60px;
+}
+
+/* Justified text leaves large gaps on narrow screens, so only justify on wider ones */
+.text-justify-md {
+  text-align: left;
+}
+
+@media(min-width:768px) {
+  .text-justify-md {
+    text-align: justify;
+  }
+}
+
+.results-summary {
+  text-align: center !important;
+  text-indent: 0 !important;
+  padding-left: 0 !important;
+}
+
+.endorsement {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.endorsement blockquote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: inherit;
+}
+
+.endorsement figcaption {
+  text-align: right;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.endorsement cite {
+  font-style: italic;
+}
+
+.need-button {
+  min-width: 175px;
+}
+
+.need-button .fa-2x {
+  margin-top: 10px;
+}
+
+.need-label {
+  display: block;
+  margin: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: none;
+}
+
+.footer-legal {
+  font-size: 16px;
+}
+
+.footer-legal > * + *::before {
+  content: "\00B7";
+  display: inline-block;
+  margin: 0 10px;
+  color: #eee;
+}
+
+footer a {
+  text-decoration: underline;
+}
+
+/* Skip link: hidden until focused by keyboard */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 8px;
+  z-index: 2000;
+  padding: 10px 16px;
+  background: #fff;
+  color: #000;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 8px;
+  color: #000;
+}
+
+#main-content:focus {
+  outline: 0;
+}
+
+/* Clearly visible keyboard focus on the dark background */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+/* Pause control for the autoplaying header video (WCAG 2.2.2) */
+.video-toggle {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 300;
+  padding: 8px 14px;
+  border: 1px solid #fff;
+  background: rgba(0,0,0,.6);
+  color: #fff;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+}
+
+.video-toggle:hover,
+.video-toggle:focus {
+  background: rgba(0,0,0,.85);
+}
+
+@media(max-width:767px) {
+  .video-toggle {
+    display: none !important;
+  }
+}
+
+/* Privacy and accessibility pages */
+.legal-page {
+  padding-top: 120px;
+  padding-bottom: 60px;
+}
+
+.legal-page h1 {
+  text-transform: none;
+  font-size: 36px;
+}
+
+.legal-page h2 {
+  margin: 40px 0 15px;
+  font-size: 22px;
+  text-transform: none;
+}
+
+.legal-page p,
+.legal-page li {
+  text-align: left;
+  color: #eee;
+}
+
+.legal-page ul {
+  text-align: left !important;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.legal-page .effective-date {
+  color: #ccc;
+  font-size: 16px;
+}
+
+.legal-page a {
+  text-decoration: underline;
+}
+
+/* Respect visitors who ask their device for less motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    -webkit-animation: none !important;
+    animation: none !important;
+    -webkit-transition: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Sections receive focus after in-page navigation; no ring needed on those */
+[tabindex="-1"]:focus {
+  outline: 0;
 }

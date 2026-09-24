@@ -18,11 +18,16 @@ $(document).ready(collapseNavbar);
 
 // jQuery for page scrolling feature - requires jQuery Easing plugin
 $(function() {
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     $('a.page-scroll').bind('click', function(event) {
         var $anchor = $(this);
+        var $target = $($anchor.attr('href'));
         $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo');
+            scrollTop: $target.offset().top
+        }, reduceMotion ? 0 : 1500, 'easeInOutExpo', function() {
+            // Move keyboard and screen reader focus to the section scrolled to
+            $target.attr('tabindex', '-1').focus({ preventScroll: true });
+        });
         event.preventDefault();
     });
 });
@@ -36,11 +41,20 @@ $('.navbar-collapse ul li a').click(function() {
 
 // Google Maps Scripts
 var map = null;
-// When the window has finished loading create our google map below
-google.maps.event.addDomListener(window, 'load', init);
-google.maps.event.addDomListener(window, 'resize', function() {
-    map.setCenter(new google.maps.LatLng(42.3601, -71.0589));
-});
+// When the window has finished loading create our google map below.
+// If the Maps script is blocked or fails to load, hide the empty map area instead of throwing.
+if (typeof google !== 'undefined' && google.maps) {
+    google.maps.event.addDomListener(window, 'load', init);
+    google.maps.event.addDomListener(window, 'resize', function() {
+        if (map) {
+            map.setCenter(new google.maps.LatLng(42.3601, -71.0589));
+        }
+    });
+} else {
+    $(function() {
+        $('#map').hide();
+    });
+}
 
 function init() {
     // Basic options for a simple Google Map
