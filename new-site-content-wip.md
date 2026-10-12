@@ -11,7 +11,7 @@ Resume-like items:
     - Customer Success
         - Operations
         - Coaching
-        - KCS design & implementaion
+        - KCS design & implementation
         - Process design
     - Marketing
         - Whitepapers
